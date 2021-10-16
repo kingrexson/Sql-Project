@@ -1,7 +1,6 @@
 # Sql-Project
 
-
-##Project 1
+## Project 1
 ### Project Objective
 The objective of this project is to find the BMT Loss rate of the GTEPs in Air Force Basic Military Training (BMT).  
 ### Project Background 
@@ -16,4 +15,5 @@ This project is might to report the number of trainee
 
 ### Discussion 
 
+### Result
 ### Result
