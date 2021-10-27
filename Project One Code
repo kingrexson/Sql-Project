@@ -1,1 +1,74 @@
+create database if not exists BMT_loss;
+Use BMT_loss;
+
+Create table BMT(
+FY Year,
+SSN VARCHAR(11),
+AFN SMALLINT,  
+BMT_Course_ID VarChar(20),
+BMT_AFSC_Shred Varchar(6),
+BMT_SAFSC_Shred Varchar(6),
+Mearsure Varchar(15)
+);
+describe BMT;
+
+Create table TT(
+FY Year,
+SSN VARCHAR(11),
+TT_Course_ID Varchar(20), 
+TT_AFSC_Shred Varchar(6),
+Measure Varchar(15),
+Status_Date Date,
+ Status_code varchar(3)
+ );
+ describe TT;
+  
+ select * from BMT;
+ insert into BMT(FY,SSN, AFN, BMT_Course_ID ,BMT_AFSC_Shred,BMT_AFSC_Shred, Measure)
+ values ();
+ 
+  select * from TT;
+ insert into TT(FY,SSN, AFN, BMT_Course_ID ,BMT_AFSC_Shred)
+ values ();
+ 
+
+  update BMT
+ set BMT_AFSC_Shred= '1Z131' and '1Z123' and '1Z331' and '1Z431'
+ where BMT_AFSC_Shred= '1T231' and '1C231' and '1C431' and '1W032';
+ 
+  update TT
+ set TT_AFSC_Shred= '1Z131' and '1Z123' and '1Z331' and '1Z431'
+ where TT_AFSC_Shred= '1T231' and '1C231' and '1C431' and '1W032';
+ 
+ # Self join
+ Create table BMT_Student_Flow(
+ select FY, SSN, AFN, BMT_Course_ID, BMT_AFSC_Shred , BMT_SAFSC_Shred ,
+BMT_Entries.measure as Entries , 
+ BMT_Term.measure As Term
+ from BMT as BMT_Entries 
+ join BMT as BMT_Term
+on BMT_Entries.SSN = BMT_Term.SSN
+Where BMT_Entries.mearsure = 'Entries' 
+and BMT_Term.measure = 'Graduate'or 'Elimination');
+
+
+    select BMT_SAFSC_Shred,
+    Case
+		When Substring(BMT_SAFSC_Shred,4,1) =1 then Substring(BMT_SAFSC_Shred,4,1) =3
+    End
+  From BMT_Student_Flow;
+  
+select BMT_Measure,
+     case 
+     when BMT_Measure= "elimination" then 1
+     else 0
+End as BMT_Elim
+From BMT_Student_Flow;
+
+ select BMT_Measure,
+     case 
+     when BMT_Measure= "graduate" then 1
+     else 0
+End as BMT_Grad
+From BMT_Student_Flow;   
 
